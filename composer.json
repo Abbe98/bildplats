@@ -1,6 +1,6 @@
 {
   "require": {
     "abbe98/simple-pdo": "2.*",
-    "abbe98/ksamsok-php": "1.2.0"
+    "abbe98/ksamsok-php": "0.4.*"
   }
 }

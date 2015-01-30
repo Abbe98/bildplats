@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="sv">
+	<head>
+		<title>Bild Utan Plats</title>
+		<meta charset="UTF8" />
+
+		<link rel="stylesheet" href="frontend/style.css" />
+		<link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.css" />
+
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script src="https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<header>
+				<img src="frontend/img/header.jpg" />
+			</header>
+			<form id="form">
+				<label hidden for="search">Sök efter bilder här:</label>
+				<button type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.59 16.34l4.58-4.59-4.58-4.59 1.41-1.41 6 6-6 6z"/><path d="M0-.25h24v24h-24z" fill="none"/></svg></button>
+				<input type="text" id="search" placeholder="Sök Här!" autocomplete="off" />
+				<div id="autocomplete">
+				</div>
+			</form>
+		</div>
+
+		<section id="image" class="container">
+			<p><span id="num_results"></span> foton hittades...</p>
+			<img id="image_holder" src="" />
+			<p id="img_text"></p>
+			<p id="location_text"></p>
+			<p>Fotograf: <span id="by"></span></p>
+			<p>Copyright: <span id="copyright"></span></p>
+			<div class="b_btn green">
+				<div onclick="prepareMap()">Karta</div>
+				<div id="next_pic">Ny Bild</div>
+			</div>
+		</section>
+
+		<section id="map" class="container">
+			<div id="leaflet"></div>
+			<div class="b_btn blue">Välj Plats</div>
+		</section>
+
+		<footer>
+			<p>Källkod _ API _ KSamsök</p>
+		</footer>
+
+		<script src="frontend/ui.js"></script>
+		<script type="text/javascript">
+
+		  $('#search').keyup(function() {
+		    console.log('key');
+		    searchHintCall();
+		  });
+
+		  $('#search').focus(function() {
+		    console.log('focus');
+		    var val = $('#search').val();
+		    if (val !== '') {
+		      searchHintCall();
+		    };
+		  });
+
+		  $('#search').focusout(function() {
+		    console.log('focusout');
+		    $('#autocomplete').slideUp('slow');
+		  });
+
+		  function searchHintCall() {
+		    var val = $('#search').val();
+		    console.log(val);
+		    $.ajax({
+		      url: 'ajax.php',
+		      type: 'POST',
+		      data: {action: 'searchHint', searchString: val},
+		      success: function(result) {
+		        console.log('ajax hint success');
+		        $('#autocomplete').html(result);
+		        $('#autocomplete').slideDown('slow');
+		      }
+		    });
+		  }
+
+		  $('#form').submit(function(e) {
+		    e.preventDefault();
+		    var searchString = $('#search').val();
+		    searchImages(searchString);
+		  });
+
+		  // global
+
+		  var searchResult;
+		  var imageNum;
+		  var numResults;
+
+		  function searchImages(searchString) {
+		    console.log('search');
+		    $.ajax({
+		      url: 'ajax.php',
+		      type: 'POST',
+		      data: {action: 'search', searchString: searchString},
+		      success: function(result) {
+		        console.log(result);
+		        numResults = result.length;
+		        $('#num_results').text(numResults);
+		        imageNum = 0;
+		        searchResult = result;
+
+		        nextImage();
+		      }
+		    });
+		  }
+
+		  function nextImage() {
+		    if (searchResult[imageNum].presentation.description) {
+		      $('#img_text').text(searchResult[imageNum].presentation.description);
+		    } else {
+		      $('#img_text').text('Ingen beskrivning är tillgänglig.');
+		    }
+
+		    if (searchResult[imageNum].presentation.contexts[0].place_label) {
+		      $('#location_text').text(searchResult[imageNum].presentation.contexts[0].place_label);
+		    } else {
+		      $('#location_text').text('Ingen plats beskriven.');
+		    }
+
+		    var image = searchResult[imageNum].presentation.images[0];
+
+		    if (image.by_line) {
+		      $('#by').text(image.by_line);
+		    } else {
+		      $('#by').text('Okänd');
+		    }
+
+		    if (image.copyright) {
+		      $('#copyright').text(image.copyright);
+		    } else {
+		      $('#copyright').text('Okänd');
+		    }
+
+		    if (image.highres) {
+		      $('#image_holder').attr('src', image.highres);
+		    } else if (image.thumbnail) {
+		      $('#image_holder').attr('src', image.thumbnail);
+		    } else if (image.lowres) {
+		      $('#image_holder').attr('src', image.lowres);
+		    }
+
+		    $('#image').css('display', 'block');
+		    $('html,body').animate({
+		      scrollTop: $('#image').offset().top},
+		     'slow');
+		  }
+
+		  function prepareMap() {
+		    $('#map').css('display', 'block');
+		    if (!mapCreated) {
+		      createMap();
+		    }
+
+		    $('html,body').animate({
+		      scrollTop: $('#map').offset().top},
+		      'slow');
+		  }
+		</script>
+	</body>
+</html>

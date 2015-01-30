@@ -33,7 +33,7 @@
 			<p>Copyright: <span id="copyright"></span></p>
 			<div class="b_btn green">
 				<div onclick="prepareMap()">Karta</div>
-				<div id="next_pic">Ny Bild</div>
+				<div id="next_pic" onclick="nextImage()" data-mode="enabled">Ny Bild</div>
 			</div>
 		</section>
 
@@ -113,45 +113,57 @@
 		  }
 
 		  function nextImage() {
-		    if (searchResult[imageNum].presentation.description) {
-		      $('#img_text').text(searchResult[imageNum].presentation.description);
-		    } else {
-		      $('#img_text').text('Ingen beskrivning är tillgänglig.');
-		    }
+		    // #next_pic should be enabled by default disabling is done below
+		    $('#next_pic').attr('data-mode', 'enabled');
 
-		    if (searchResult[imageNum].presentation.contexts[0].place_label) {
-		      $('#location_text').text(searchResult[imageNum].presentation.contexts[0].place_label);
-		    } else {
-		      $('#location_text').text('Ingen plats beskriven.');
-		    }
+			  if (imageNum === numResults) {
+			    // kill #next_pic uses CSS to kill pointer events.
+			    $('#next_pic').attr('data-mode', 'disabled');
+			    console.log('#next_pic disabled');
+			  } else {
+			    if (searchResult[imageNum].presentation.description) {
+			      $('#img_text').text(searchResult[imageNum].presentation.description);
+			    } else {
+			      $('#img_text').text('Ingen beskrivning är tillgänglig.');
+			    }
 
-		    var image = searchResult[imageNum].presentation.images[0];
+			    if (searchResult[imageNum].presentation.contexts[0].place_label) {
+			      $('#location_text').text(searchResult[imageNum].presentation.contexts[0].place_label);
+			    } else {
+			      $('#location_text').text('Ingen plats beskriven.');
+			    }
 
-		    if (image.by_line) {
-		      $('#by').text(image.by_line);
-		    } else {
-		      $('#by').text('Okänd');
-		    }
+			    var image = searchResult[imageNum].presentation.images[0];
 
-		    if (image.copyright) {
-		      $('#copyright').text(image.copyright);
-		    } else {
-		      $('#copyright').text('Okänd');
-		    }
+			    if (image.by_line) {
+			      $('#by').text(image.by_line);
+			    } else {
+			      $('#by').text('Okänd');
+			    }
 
-		    if (image.highres) {
-		      $('#image_holder').attr('src', image.highres);
-		    } else if (image.thumbnail) {
-		      $('#image_holder').attr('src', image.thumbnail);
-		    } else if (image.lowres) {
-		      $('#image_holder').attr('src', image.lowres);
-		    }
+			    if (image.copyright) {
+			      $('#copyright').text(image.copyright);
+			    } else {
+			      $('#copyright').text('Okänd');
+			    }
 
-		    $('#image').css('display', 'block');
-		    $('html,body').animate({
-		      scrollTop: $('#image').offset().top},
-		     'slow');
-		  }
+			    if (image.highres) {
+			      $('#image_holder').attr('src', image.highres);
+			    } else if (image.thumbnail) {
+			      $('#image_holder').attr('src', image.thumbnail);
+			    } else if (image.lowres) {
+			      $('#image_holder').attr('src', image.lowres);
+			    }
+
+			    $('#image').css('display', 'block');
+			    $('html,body').animate({
+			      scrollTop: $('#image').offset().top},
+			     'slow');
+
+			    imageNum = imageNum+1;
+			    console.log('next image:' + imageNum);
+			  }
+			}
 
 		  function prepareMap() {
 		    $('#map').css('display', 'block');

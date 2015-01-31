@@ -29,7 +29,7 @@ function centerContent() {
     } else {
       $('#result_wrapper').css('padding-top', '0px');
     }
-  }, 300);
+  }, 200);
 }
 
 $(window).resize(function() {

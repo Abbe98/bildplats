@@ -1,10 +1,11 @@
-var mapCreated = false;
-// Provide your access token
+// Provide your access token and map id
 L.mapbox.accessToken = 'pk.eyJ1IjoiYWJiZSIsImEiOiJmMUJVRkRrIn0.HFVLR_-KbhpiuV9DBkt7jw';
+mapId = 'abbe.kj42nfkg';
 
+var mapCreated = false;
 function createMap() {
   // Create a map in the div #map
-  L.mapbox.map('leaflet', 'abbe.kj42nfkg');
+  L.mapbox.map('leaflet', mapId);
   mapCreated = true;
 }
 

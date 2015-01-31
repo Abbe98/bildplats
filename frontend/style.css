@@ -87,6 +87,9 @@ button[type="submit"] svg {
   display: block;
   margin: auto;
   max-width: 100%;
+  background-image: url('img/svg_64_sad.svg');
+  background-size: 100%;
+  min-width: 128px;
 }
 
 #map {

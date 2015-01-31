@@ -2,8 +2,10 @@
 class customKSamsok extends kSamsok {
   public function photoSearch($text) {
     // build $urlQuery
+    $text = str_replace(' ', '%20', $text);
     $urlQuery = $this->url . 'x-api=' . $this->key . '&method=search&hitsPerPage=250&query=itemType="Foto"%20and%20text="' . $text . '"%20and%20mediaType="image/jpeg"%20and%20thumbnailExists=j&recordSchema=presentation';
     $urlQuery = utf8_decode($urlQuery);
+
     $this->validXml($urlQuery);
     // get the XML
     $xml = file_get_contents($urlQuery);

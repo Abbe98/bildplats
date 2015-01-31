@@ -19,7 +19,7 @@ form {
   margin: 2em auto;
 }
 
-input[type="text"] {
+#search {
   display: block;
   margin: 50px 0 0 0;
   padding: 0.5em 1em 0.5em 0.7em;
@@ -94,6 +94,12 @@ button[type="submit"] svg {
 
 #map {
   display: none;
+}
+
+#leaflet,
+.leaflet-dragging.leaflet-container,
+.leaflet-dragging .leaflet-clickable {
+  cursor: move;
 }
 
 #leaflet {

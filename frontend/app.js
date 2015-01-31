@@ -70,6 +70,9 @@ function nextImage() {
     $('#next_pic').attr('data-mode', 'disabled');
     console.log('#next_pic disabled');
   } else {
+    // set uri
+    $('#current_uri').val(searchResult[imageNum].presentation.uri);
+
     if (searchResult[imageNum].presentation.description) {
       $('#img_text').text(searchResult[imageNum].presentation.description);
     } else {
@@ -124,4 +127,33 @@ function prepareMap() {
   $('html,body').animate({
     scrollTop: $('#map').offset().top},
     'slow');
+}
+
+function getLocation() {
+  $('#leaflet').css('cursor', 'crosshair');
+
+  $('#location_picker').text('Klicka på Kartan');
+
+  leafletMap.on('click', function(e) {
+    var l = e.latlng.toString();
+    l = l.substr(0, l.length-1);
+    l = l.substr(7);
+    console.log(l);
+
+    $('#location').val(l);
+    $('#location_picker').text('Sparar..');
+    $('#leaflet').css('cursor', 'move');
+
+    var location = $('#location').val(l);
+    var uri = $('#current_uri').val(l);
+
+    $.ajax({
+      url: 'ajax.php',
+      type: 'POST',
+      data: {action: 'save', uri: uri, location: location}
+      success: function(result) {
+        //check for error/success
+      }
+    });
+  });
 }

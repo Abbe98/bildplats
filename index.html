@@ -40,8 +40,10 @@
 		</section>
 
 		<section id="map" class="container">
+			<input hidden type="text" id="location" value="" />
+			<input hidden type="text" id="current_uri" value="" />
 			<div id="leaflet"></div>
-			<div class="b_btn blue">Välj Plats</div>
+			<div class="b_btn blue" id="location_picker" onclick="getLocation()">Välj Plats</div>
 		</section>
 
 		<footer>

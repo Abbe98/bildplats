@@ -86,6 +86,7 @@ button[type="submit"] svg {
 #image img {
   display: block;
   margin: auto;
+  max-width: 100%;
 }
 
 #map {

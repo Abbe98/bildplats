@@ -25,6 +25,7 @@
 		</div>
 
 		<section id="image" class="container">
+			<div id="result_wrapper">
 			<p><span id="num_results"></span> foton hittades...</p>
 			<img id="image_holder" src="" />
 			<p id="img_text"></p>
@@ -34,6 +35,7 @@
 			<div class="b_btn green">
 				<div onclick="prepareMap()">Karta</div>
 				<div id="next_pic" onclick="nextImage()" data-mode="enabled">Ny Bild</div>
+			</div>
 			</div>
 		</section>
 
@@ -161,6 +163,7 @@
 			     'slow');
 
 			    imageNum = imageNum+1;
+			    centerContent();
 			    console.log('next image:' + imageNum);
 			  }
 			}

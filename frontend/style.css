@@ -147,9 +147,21 @@ button[type="submit"] svg {
 }
 
 .b_btn.blue {
+  width: 100%;
+}
+
+.b_btn.blue:hover {
+  background: rgba(40, 40, 30, 0.5);
+  cursor: pointer;
+}
+
+.btn-background {
   position: relative;
   bottom: 70px;
   background: rgba(29, 28, 43, 1.0);
+  width: 50%;
+  margin: auto;
+  border-radius: 10px;
 }
 
 footer p {

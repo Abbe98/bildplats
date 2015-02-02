@@ -3,7 +3,6 @@ require_once 'core/init.php';
 
 // new API connection
 $KSamsok = new customKSamsok($kSamsokApiKey);
-$db = new db;
 
 // check for action ignore random calls
 if (isset($_POST['action'])) {

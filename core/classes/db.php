@@ -32,11 +32,19 @@ class db {
   }
 
   public static function objectExists($uri) {
-    // $uri is validated in $this->save() or it comes from a api call so no need to validate it
+    // $uri is validated in $this->save()
     $database = SimplePDO::getInstance();
     $database->query("SELECT `ksamsok` FROM `photos` WHERE `ksamsok` = :uri");
     $database->bind(':uri', $uri);
     // will return false if it does not exist()
+    return $database->single();
+  }
+
+  public static function getObject($uri) {
+    $database = SimplePDO::getInstance();
+    $database->query("SELECT `ksamsok`, `coord`, `created` FROM `photos` WHERE `ksamsok` = :uri");
+    $database->bind(':uri', $uri);
+
     return $database->single();
   }
 }

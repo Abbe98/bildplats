@@ -131,6 +131,7 @@ button[type="submit"] svg {
 
 .b_btn.green {
   background: #45C77C;
+  margin-bottom: 5px;
 }
 
 .b_btn.green div:first-child {
@@ -161,4 +162,31 @@ footer p {
   pointer-events: none;
   background: rgba(255,255,255,0.25);
   cursor: not-allowed;
+}
+
+#message {
+  padding: 4px 10px;
+  font-weight: 600;
+  text-align: center;
+  word-wrap: break-word;
+  margin-bottom: 8px;
+  font-size: 0.875rem;
+  position: fixed;
+  color: #fff;
+  width: 75%;
+  left: 50%;
+  margin: 0 0 0 -37.5%;
+  top: -300px;
+  transition: 1s ease-in-out;
+  z-index: 99999;
+}
+
+#message[data-message='error'] {
+  background: #e74c3c;
+  border: 2px solid #c0392b;
+}
+
+#message[data-message='correct'] {
+  background: #45C77C;
+  border: 2px solid rgba(255,255,255,0.25);
 }

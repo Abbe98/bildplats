@@ -42,6 +42,7 @@ function searchHintCall() {
 var searchResult;
 var imageNum;
 var numResults;
+var currentUri;
 
 function searchImages(searchString) {
   console.log('search');
@@ -51,19 +52,26 @@ function searchImages(searchString) {
     data: {action: 'search', searchString: searchString},
     success: function(result) {
       console.log(result);
-      numResults = result.length;
-      $('#num_results').text(numResults);
-      imageNum = 0;
-      searchResult = result;
+      if (result.result == 'error') {
+        console.log('error');
+        message(result);
+      } else {
+        numResults = result.length;
+        $('#num_results').text(numResults);
+        imageNum = 0;
+        searchResult = result;
 
-      nextImage();
+        nextImage();
+      }
     }
   });
 }
 
+
 function nextImage() {
   // #next_pic should be enabled by default disabling is done below
   $('#next_pic').attr('data-mode', 'enabled');
+  $('#location_picker').text('Välj Plats');
 
   if (imageNum === numResults) {
     // kill #next_pic uses CSS to kill pointer events.
@@ -71,7 +79,7 @@ function nextImage() {
     console.log('#next_pic disabled');
   } else {
     // set uri
-    $('#current_uri').val(searchResult[imageNum].presentation.uri);
+    currentUri = searchResult[imageNum].presentation.uri;
 
     if (searchResult[imageNum].presentation.description) {
       $('#img_text').text(searchResult[imageNum].presentation.description);
@@ -110,7 +118,7 @@ function nextImage() {
     $('#image').css('display', 'block');
     $('html,body').animate({
       scrollTop: $('#image').offset().top},
-     'slow');
+      'slow');
 
     imageNum = imageNum+1;
     centerContent();
@@ -135,24 +143,38 @@ function getLocation() {
   $('#location_picker').text('Klicka på Kartan');
 
   leafletMap.on('click', function(e) {
+    leafletMap.off('click');
     var l = e.latlng.toString();
     l = l.substr(0, l.length-1);
     l = l.substr(7);
     console.log(l);
+
+    locationPickerState = false;
 
     $('#location').val(l);
     $('#location_picker').text('Sparar..');
     $('#leaflet').css('cursor', 'move');
 
     var location = $('#location').val(l);
-    var uri = $('#current_uri').val(l);
 
     $.ajax({
       url: 'ajax.php',
       type: 'POST',
-      data: {action: 'save', uri: uri, location: location}
+      data: {action: 'save', uri: currentUri, location: location.val()},
       success: function(result) {
-        //check for error/success
+        if (result.result == 'error') {
+          console.log('error');
+          message(result);
+          $('#location_picker').text(':-(');
+        } else {
+          message(result);
+          $('#location_picker').text('Sparat!');
+
+          nextImage();
+          $('html,body').animate({
+            scrollTop: $('#image').offset().top},
+            'slow');
+        }
       }
     });
   });

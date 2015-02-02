@@ -3,6 +3,7 @@ require_once 'core/init.php';
 
 // new API connection
 $KSamsok = new customKSamsok($kSamsokApiKey);
+$db = new db;
 
 // check for action ignore random calls
 if (isset($_POST['action'])) {
@@ -28,26 +29,42 @@ if (isset($_POST['action'])) {
       $results = $KSamsok->photoSearch($_POST['searchString']);
 
       if (!empty($results)) {
-        //check if results has coords
-        $i = 0;
-        foreach ($results as $result) {
-          if (empty($result->coordinates)) {
-            $searchResult[$i] = $result;
-            $i++;
+        for ($i=0; $i < count($results); $i++) { 
+          if (empty($results[$i]['presentation']['coordinates']) && $db::objectExists($results[$i]['presentation']['uri']) === false) {
+            $searchResult[] = $results[$i];
           }
         }
+
         // output result as JSON
         if (isset($searchResult)) {
           header('Content-type: application/json');
           echo json_encode($searchResult);
         } else {
-          #TODO
-          // no results error
+          header('Content-type: application/json');
+          echo('{"result": "error","message": "Inga Foton Hittades"}');
         }
       } else {
-        #TODO
-        // no results error
+          header('Content-type: application/json');
+          echo('{"result": "error","message": "Inga Foton Hittades"}');
       }
+    }
+  }
+
+  if ($_POST['action'] === 'save') {
+    if (isset($_POST['uri']) && isset($_POST['location'])) {
+      // try to save
+      if ($db::save($_POST['uri'], $_POST['location'])) {
+        // added to db :-)
+        header('Content-type: application/json');
+        echo('{"result": "correct","message": "Platsen Sparades"}');
+      } else {
+        // saving failed
+        header('Content-type: application/json');
+        echo('{"result": "error","message": "Något Gick Fel"}');
+      }
+    } else {
+      header('Content-type: application/json');
+        echo('{"result": "error","message": "Något Gick Fel"}');
     }
   }
 }

@@ -14,6 +14,7 @@ class customKSamsok extends kSamsok {
     $xml = new SimpleXMLElement($xml);
 
     // parse each record and push to $result array
+    $result = array();
     foreach ($xml->records->record as $record) {
       $result[] = $this->parseRecord($record);
     }

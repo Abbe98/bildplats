@@ -1,10 +1,8 @@
 $('#search').keyup(function() {
-  console.log('key');
   searchHintCall();
 });
 
 $('#search').focus(function() {
-  console.log('focus');
   var val = $('#search').val();
   if (val !== '') {
     searchHintCall();
@@ -12,7 +10,6 @@ $('#search').focus(function() {
 });
 
 $('#search').focusout(function() {
-  console.log('focusout');
   $('#autocomplete').slideUp('slow');
 });
 
@@ -24,13 +21,11 @@ $('#form').submit(function(e) {
 
 function searchHintCall() {
   var val = $('#search').val();
-  console.log(val);
   $.ajax({
     url: 'ajax.php',
     type: 'POST',
     data: {action: 'searchHint', searchString: val},
     success: function(result) {
-      console.log('ajax hint success');
       $('#autocomplete').html(result);
       $('#autocomplete').slideDown('slow');
     }
@@ -45,15 +40,12 @@ var numResults;
 var currentUri;
 
 function searchImages(searchString) {
-  console.log('search');
   $.ajax({
     url: 'ajax.php',
     type: 'POST',
     data: {action: 'search', searchString: searchString},
     success: function(result) {
-      console.log(result);
       if (result.result == 'error') {
-        console.log('error');
         message(result);
       } else {
         numResults = result.length;
@@ -76,7 +68,6 @@ function nextImage() {
   if (imageNum === numResults) {
     // kill #next_pic uses CSS to kill pointer events.
     $('#next_pic').attr('data-mode', 'disabled');
-    console.log('#next_pic disabled');
   } else {
     // set uri
     currentUri = searchResult[imageNum].presentation.uri;
@@ -122,7 +113,6 @@ function nextImage() {
 
     imageNum = imageNum+1;
     centerContent();
-    console.log('next image:' + imageNum);
   }
 }
 
@@ -147,7 +137,6 @@ function getLocation() {
     var l = e.latlng.toString();
     l = l.substr(0, l.length-1);
     l = l.substr(7);
-    console.log(l);
 
     locationPickerState = false;
 
@@ -163,7 +152,6 @@ function getLocation() {
       data: {action: 'save', uri: currentUri, location: location.val()},
       success: function(result) {
         if (result.result == 'error') {
-          console.log('error');
           message(result);
           $('#location_picker').text(':-(');
         } else {

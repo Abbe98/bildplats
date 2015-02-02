@@ -23,4 +23,4 @@ All data displayed using Bildplats provided by K-Samsök has individual licensin
 
 All map data is from OpenStreetMap(ODBL license).
 
-![http://abbe98.github.io/assets/bildplats.png](Screenshot from Bildplats)
+![Screenshot from Bildplats.](http://abbe98.github.io/assets/bildplats.png)

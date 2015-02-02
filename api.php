@@ -14,7 +14,7 @@ if (isset($_GET['method'])) {
         die();
       }
     } else {
-      apiError('Invalid URI');
+      apiError('Invalid URI or no URI parameter set');
     }
   } else {
     apiError('Invalid API method');
@@ -30,7 +30,7 @@ if (isset($_GET['method'])) {
         die();
       }
     } else {
-      apiError('Invalid URI');
+      apiError('Invalid URI or no URI parameter set');
     }
   } else {
     apiError('Invalid API method');

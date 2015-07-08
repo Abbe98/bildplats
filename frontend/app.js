@@ -48,6 +48,7 @@ function searchHintCall() {
 
 function searchImages(searchString) {
   var val = $('#search').val(searchString);
+  toggleLoader();
 
   $.ajax({
     url: 'ajax.php',
@@ -63,11 +64,11 @@ function searchImages(searchString) {
         searchResult = result;
 
         nextImage();
+        toggleLoader();
       }
     }
   });
 }
-
 
 function nextImage() {
   // #next_pic should be enabled by default disabling is done below

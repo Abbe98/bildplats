@@ -2,8 +2,10 @@
 L.mapbox.accessToken = 'pk.eyJ1IjoiYWJiZSIsImEiOiJmMUJVRkRrIn0.HFVLR_-KbhpiuV9DBkt7jw';
 mapId = 'abbe.kj42nfkg';
 
+// global
 var mapCreated = false;
 var leafletMap;
+
 function createMap() {
   // Create a map in the div #map
   leafletMap = L.mapbox.map('leaflet', mapId);
@@ -29,4 +31,8 @@ function resetMessage() {
     $('#message').css('top', '-300px');
     $('#message').text('');
   }, 5000)
+}
+
+function toggleLoader() {
+  $('.loader').slideToggle();
 }

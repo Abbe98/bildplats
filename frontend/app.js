@@ -19,25 +19,35 @@ $('#form').submit(function(e) {
   searchImages(searchString);
 });
 
-function searchHintCall() {
-  var val = $('#search').val();
-  $.ajax({
-    url: 'ajax.php',
-    type: 'POST',
-    data: {action: 'searchHint', searchString: val},
-    success: function(result) {
-      $('#autocomplete').html(result);
-      $('#autocomplete').slideDown('slow');
-    }
-  });
-}
-
 // global
 
 var searchResult;
 var imageNum;
 var numResults;
 var currentUri;
+
+// counts searchHintCall() ajax calls
+var currentSearchCall = 0;
+
+function searchHintCall() {
+  // sets this call to the global hint calls count value and increase the global value by one
+  var searchHintCallId = currentSearchCall;
+  currentSearchCall = currentSearchCall + 1;
+
+  var val = $('#search').val();
+  $.ajax({
+    url: 'ajax.php',
+    type: 'POST',
+    data: {action: 'searchHint', searchString: val},
+    success: function(result) {
+      // if this hint call was the last ajax call to be made display it
+      if (searchHintCallId === currentSearchCall - 1) {
+        $('#autocomplete').html(result);
+        $('#autocomplete').slideDown('slow');
+      };
+    }
+  });
+}
 
 function searchImages(searchString) {
   $.ajax({

@@ -3,10 +3,7 @@ $('#search').keyup(function() {
 });
 
 $('#search').focus(function() {
-  var val = $('#search').val();
-  if (val !== '') {
-    searchHintCall();
-  };
+  searchHintCall();
 });
 
 $('#search').focusout(function() {

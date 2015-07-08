@@ -50,6 +50,8 @@ function searchHintCall() {
 }
 
 function searchImages(searchString) {
+  var val = $('#search').val(searchString);
+
   $.ajax({
     url: 'ajax.php',
     type: 'POST',

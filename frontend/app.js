@@ -124,7 +124,6 @@ function nextImage() {
       'slow');
 
     imageNum = imageNum+1;
-    centerContent();
   }
 }
 

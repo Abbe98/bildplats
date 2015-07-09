@@ -57,6 +57,7 @@ function searchImages(searchString) {
     success: function(result) {
       if (result.result == 'error') {
         message(result);
+        toggleLoader();
       } else {
         numResults = result.length;
         $('#num_results').text(numResults);

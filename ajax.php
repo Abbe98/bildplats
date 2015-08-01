@@ -1,8 +1,6 @@
 <?php
 require_once 'core/init.php';
 
-$KSamsok = new customKSamsok($kSamsokApiKey);
-
 // check for action ignore random calls
 if (isset($_POST['action'])) {
   if ($_POST['action'] === 'searchHint') {
@@ -26,7 +24,7 @@ if (isset($_POST['action'])) {
 
       if (!empty($results)) {
         for ($i=0; $i < count($results); $i++) { 
-          if (empty($results[$i]['presentation']['coordinates']) && $db::objectExists($results[$i]['presentation']['uri']) === false) {
+          if (empty($results[$i]['presentation']['coordinates']) && $db::getObject($results[$i]['presentation']['uri']) === false) {
             $searchResult[] = $results[$i];
           }
         }

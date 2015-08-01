@@ -10,7 +10,7 @@ class db {
       // if valid URI process
       if (!$uri === false) {
         // if uri does not exist in db add it and return true
-        if (self::objectExists($uri) === false) {
+        if (self::getObject($uri) === false) {
           $database = SimplePDO::getInstance();
           $database->query("INSERT INTO `photos` (ksamsok, coord) VALUES (:uri, :location)");
           $database->bind(':uri', $uri);
@@ -27,15 +27,6 @@ class db {
     } else {
       return false;
     }
-  }
-
-  public static function objectExists($uri) {
-    // $uri is validated in $this->save()
-    $database = SimplePDO::getInstance();
-    $database->query("SELECT `ksamsok` FROM `photos` WHERE `ksamsok` = :uri");
-    $database->bind(':uri', $uri);
-    // will return false if it does not exist()
-    return $database->single();
   }
 
   public static function getObject($uri) {

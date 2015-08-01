@@ -1,8 +1,8 @@
 #API
 
-Bildplats provides a basic API supporting both `GET` and `POST` for getting data, the response is JSON only.
+Bildplats provides a basic API supporting `GET` requests for retrieving data, the response is currently JSON only.
 
-##End Point
+##Endpoint
 
 All API calls should go to `api.php`.
 
@@ -10,15 +10,20 @@ All API calls should go to `api.php`.
 
 The only current method is `object` this is used to return the location based on a URI provided by K-Samsök:
 
-K-Samsök call(XML/RDF): `<pres:entityUri>`
+The object URI is set using the `uri` parameter. The API supports all types of K-Samsök URIs:
 
-kSamsök-PHP: `['presentation']['uri']`
+ - raw
+ - rawurl
+ - xml
+ - xmlurl
+ - rdf
+ - rdfurl
+ - html
+ - htmlurl
 
-This URI is set using the `uri` parameter.
+##Example Calls
 
-##Example Call
-
-Example `GET` request:
+Example request:
 
 `http://example.com/api.php?method=object&uri=http://kulturarvsdata.se/raa/kmb/16000200096441`
 
@@ -32,7 +37,9 @@ This could trigger the following response:
 }
 ```
 
-or a error.
+This request would work just as well:
+
+`http://example.com/api.php?method=object&uri=raa/kmb/16000200096441`
 
 ##Errors
 
@@ -44,7 +51,7 @@ Note that this is still a HTTP status 200 response.
 
 ###List of Errors
 
- - `URI not found in database`
- - `Invalid URI or no URI parameter set`
- - `Invalid API method`
- - `No method specified`
+ - `An object with this URI does not exists in the database.`
+ - `Invalid URI or no URI parameter set.`
+ - `Invalid API method.`
+ - `No method specified.`

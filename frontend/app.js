@@ -89,8 +89,12 @@ function nextImage() {
       $('#img_text').text('Ingen beskrivning är tillgänglig.');
     }
 
-    if (searchResult[imageNum].presentation.contexts[0].place_label) {
-      $('#location_text').text(searchResult[imageNum].presentation.contexts[0].place_label);
+    if (typeof searchResult[imageNum].presentation.contexts !== 'undefined') {
+      if (searchResult[imageNum].presentation.contexts[0].place_label) {
+        $('#location_text').text(searchResult[imageNum].presentation.contexts[0].place_label);
+      } else {
+        $('#location_text').text('Ingen plats beskriven.');
+      }
     } else {
       $('#location_text').text('Ingen plats beskriven.');
     }

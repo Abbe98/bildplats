@@ -23,8 +23,8 @@ if (isset($_POST['action'])) {
       $results = $KSamsok->photoSearch($_POST['searchString']);
 
       if (!empty($results)) {
-        for ($i=0; $i < count($results); $i++) { 
-          if (empty($results[$i]['presentation']['coordinates']) && $db::getObject($results[$i]['presentation']['uri']) === false) {
+        for ($i=0; $i < count($results); $i++) {
+          if (empty($results[$i]['presentation']['coordinates']) && $db::getObject($results[$i]['presentation']['uri']) === false) {#TODO check URI using uriFormat()
             $searchResult[] = $results[$i];
           }
         }

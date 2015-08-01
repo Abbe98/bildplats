@@ -168,12 +168,6 @@ button[type="submit"] svg {
   border-radius: 10px;
 }
 
-footer p {
-  margin: 5px;
-  color: #fff;
-  text-align: center;
-}
-
 #next_pic[data-mode='disabled'] {
   pointer-events: none;
   background: rgba(255,255,255,0.25);

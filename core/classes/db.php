@@ -1,7 +1,6 @@
 <?php
 class db {
   public static function save($uri, $location) {
-    $contibruterIp = $_SERVER['REMOTE_ADDR'];
     // location should be valid if expression does not match
     if (!preg_match('[^0-9 \. , -]', $location)) {
       // location should be valid
@@ -13,10 +12,9 @@ class db {
         // if uri does not exist in db add it and return true
         if (self::objectExists($uri) === false) {
           $database = SimplePDO::getInstance();
-          $database->query("INSERT INTO `photos` (ksamsok, coord, ip) VALUES (:uri, :location, :ip)");
+          $database->query("INSERT INTO `photos` (ksamsok, coord) VALUES (:uri, :location)");
           $database->bind(':uri', $uri);
           $database->bind(':location', $location);
-          $database->bind(':ip', $contibruterIp);
           $database->execute();
 
           return true;
@@ -42,7 +40,7 @@ class db {
 
   public static function getObject($uri) {
     $database = SimplePDO::getInstance();
-    $database->query("SELECT `ksamsok`, `coord`, `created` FROM `photos` WHERE `ksamsok` = :uri");
+    $database->query("SELECT * FROM `photos` WHERE `ksamsok` = :uri");
     $database->bind(':uri', $uri);
 
     return $database->single();

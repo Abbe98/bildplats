@@ -38,8 +38,7 @@ CREATE TABLE IF NOT EXISTS photos (
 id int(11) NOT NULL,
   ksamsok varchar(150) COLLATE utf8mb4_bin NOT NULL,
   coord varchar(16) COLLATE utf8mb4_bin NOT NULL,
-  created timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  ip varchar(64) COLLATE utf8mb4_bin NOT NULL
+  created timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin AUTO_INCREMENT=31 ;
 
 

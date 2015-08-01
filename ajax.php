@@ -8,8 +8,8 @@ if (isset($_POST['action'])) {
       header('Content-Type: text/plain; charset=utf-8');
       // API call based on current search string
       $results = $KSamsok->searchHint($_POST['searchString'], '3');
-      if ($results !== false) {
-        for ($i=0; $i < 3; $i++) { 
+      if ($results['count'] !== '0') {
+        for ($i=0; $i < $results['count']; $i++) {
           echo '<span onclick="searchImages(\'' . $results['hints'][$i]['value'] . '\');">' . ucfirst($results['hints'][$i]['value']) . '</span>';
         }
       } else {

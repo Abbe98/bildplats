@@ -206,7 +206,7 @@ button[type="submit"] svg {
   height: 80px;
   width: 80px;
   position: fixed;
-  right: 20px;
+  left: 20px;
   bottom: 20px;
 }
 

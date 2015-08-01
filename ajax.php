@@ -1,7 +1,6 @@
 <?php
 require_once 'core/init.php';
 
-// new API connection
 $KSamsok = new customKSamsok($kSamsokApiKey);
 
 // check for action ignore random calls
@@ -10,12 +9,10 @@ if (isset($_POST['action'])) {
     if (isset($_POST['searchString'])) {
       header('Content-Type: text/plain; charset=utf-8');
       // API call based on current search string
-      $hints = $KSamsok->searchHint($_POST['searchString'], '3');
-      if ($hints !== false) {
-        // loop $hints and output as HTML
-        foreach ($hints as $hint) {
-          // onclick event trigger search
-          echo '<span onclick="searchImages(\'' . $hint['value'] . '\');">' . ucfirst($hint['value']) . '</span>';
+      $results = $KSamsok->searchHint($_POST['searchString'], '3');
+      if ($results !== false) {
+        for ($i=0; $i < 3; $i++) { 
+          echo '<span onclick="searchImages(\'' . $results['hints'][$i]['value'] . '\');">' . ucfirst($results['hints'][$i]['value']) . '</span>';
         }
       } else {
         echo '';
@@ -51,8 +48,8 @@ if (isset($_POST['action'])) {
 
   if ($_POST['action'] === 'save') {
     if (isset($_POST['uri']) && isset($_POST['location'])) {
-      // try to save
-      if ($db::save($_POST['uri'], $_POST['location'])) {
+      // try to save(pass $KSamsok connection because PHP sucks right now)
+      if ($db::save($_POST['uri'], $_POST['location'], $KSamsok)) {
         // added to db :-)
         header('Content-type: application/json');
         echo('{"result": "correct","message": "Platsen Sparades"}');

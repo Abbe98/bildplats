@@ -1,14 +1,14 @@
 <?php
 class db {
-  public static function save($uri, $location) {
+  public static function save($uri, $location, $KSamsok) {
     // location should be valid if expression does not match
     if (!preg_match('[^0-9 \. , -]', $location)) {
-      // location should be valid
-      // if http://kulturarvsdata.se/ does not exist in string it's fake data also look for evil chars
-      if (preg_match('/http:\/\/kulturarvsdata\.se\/.*/', $uri) && !preg_match('/>|<|\'|"/', $uri)) {
-        // the uri should be valid
-        // both uri and location should be valid
 
+      // get the raw object URL
+      $uri = $KSamsok->uriFormat($uri, 'rawurl');
+
+      // if valid URI process
+      if (!$uri === false) {
         // if uri does not exist in db add it and return true
         if (self::objectExists($uri) === false) {
           $database = SimplePDO::getInstance();

@@ -270,3 +270,15 @@ button[type="submit"] svg {
     transform: translate3d(-50%, -50%, 0) rotate(720deg);
   }
 }
+
+@keyframes RotateIt {
+  0% {
+    -webkit-transform: translate3d(-50%, -50%, 0) rotate(0deg);
+    transform: translate3d(-50%, -50%, 0) rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: translate3d(-50%, -50%, 0) rotate(720deg);
+    transform: translate3d(-50%, -50%, 0) rotate(720deg);
+  }
+}

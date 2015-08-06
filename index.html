@@ -26,17 +26,19 @@
 		</div>
 
 		<section id="image" class="container">
-			<div id="result_wrapper">
-			<span class="result-count" id="num_results"></span>
-			<img id="image_holder" src="" />
-			<p id="img_text"></p>
-			<p id="location_text"></p>
-			<p>Fotograf: <span id="by"></span></p>
-			<p>Copyright: <span id="copyright"></span></p>
-			<div class="b_btn green">
-				<div onclick="prepareMap()">Karta</div>
-				<div id="next_pic" onclick="nextImage()" data-mode="enabled">Ny Bild</div>
+			<div class="wrapper-one">
+				<span class="result-count" id="num_results"></span>
+				<img id="image_holder" src="" />
 			</div>
+			<div class="wrapper-two">
+				<p id="img_text"></p>
+				<p id="location_text"></p>
+				<p>Fotograf: <span id="by"></span></p>
+				<p>Copyright: <span id="copyright"></span></p>
+				<div class="btn-container two">
+					<div class="btn green" onclick="prepareMap()">Välj Plats</div>
+					<div class="btn green" id="next_pic" onclick="nextImage()" data-mode="enabled">Nästa</div>
+				</div>
 			</div>
 		</section>
 
@@ -44,8 +46,8 @@
 			<input hidden type="text" id="location" value="" />
 			<input hidden type="text" id="current_uri" value="" />
 			<div id="leaflet"></div>
-			<div class="btn-background">
-				<div class="b_btn blue" id="location_picker" onclick="getLocation()">Välj Plats</div>
+			<div class="btn-container single">
+				<div class="btn blue" id="location_picker" onclick="getLocation()">Välj Plats</div>
 			</div>
 		</section>
 

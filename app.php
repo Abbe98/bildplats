@@ -1,7 +1,11 @@
+<?php
+require_once 'core/init.php';
+if (user::authorized()) {
+?>
 <!doctype html>
 <html lang="sv">
 	<head>
-		<title>Bild Utan Plats</title>
+		<title>Hitta Bilder</title>
 		<meta charset="UTF8" />
 
 		<link rel="stylesheet" href="frontend/style.css" />
@@ -59,3 +63,8 @@
 		<script src="frontend/app.js"></script>
 	</body>
 </html>
+<?php
+} else {
+  #TODO
+  // send to login page
+}

@@ -183,7 +183,7 @@ button[type="submit"] svg {
 }
 
 .btn.blue:hover {
-  border-bottom: 5px solid #black;
+  border-bottom: 5px solid black;
 }
 
 .btn.green[data-mode='disabled'] {

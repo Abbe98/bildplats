@@ -24,6 +24,10 @@ main {
   height: 75vh;
 }
 
+.btn-container.two {
+  bottom: -25px;
+}
+
 footer {
   background-color: #1D1C2B;
   color: white;

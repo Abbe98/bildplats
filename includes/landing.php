@@ -3,6 +3,7 @@
 	<head>
 		<title>BildPlats</title>
 		<meta charset="UTF8" />
+		<link rel="stylesheet" href="frontend/style.css" />
 		<link rel="stylesheet" href="frontend/landing.css" />
 	</head>
 	<body>
@@ -14,9 +15,9 @@
 			<div class="youtube-container">
 				
 			</div>
-			<div>
-				<a href="#">Logga In</a>
-				<a href="#">Utforska Bilder</a>
+			<div class="btn-container two">
+				<a href="#" class="btn blue">Logga in</a>
+				<a href="#" class="btn blue">Utforska</a>
 			</div>
 		</main>
 		<footer>

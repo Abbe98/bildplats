@@ -24,7 +24,7 @@ if (isset($_POST['action'])) {
 
       if (!empty($results)) {
         for ($i=0; $i < count($results); $i++) {
-          if (empty($results[$i]['presentation']['coordinates']) && $db::getObject($results[$i]['presentation']['uri']) === false) {#TODO check URI using uriFormat()
+          if (empty($results[$i]['presentation']['coordinates']) && $db::getObject($KSamsok->uriFormat($results[$i]['presentation']['uri'], 'rawurl')) === false) {
             $searchResult[] = $results[$i];
           }
         }

@@ -14,7 +14,7 @@ if (isset($_GET['method'])) {
       if (!$result) {
         apiError('An object with this URI does not exists in the database.');
       } else {
-        echo json_encode($result);
+        echo json_encode($result, JSON_UNESCAPED_SLASHES);
         die();
       }
     } else {
@@ -38,7 +38,7 @@ if (isset($_GET['method'])) {
     if (!$result) {
       apiError('No objects exist within this bounding box.');
     } else {
-      echo json_encode($result);
+      echo json_encode($result, JSON_UNESCAPED_SLASHES);
       die();
     }
   } else {

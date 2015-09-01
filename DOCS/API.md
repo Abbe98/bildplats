@@ -6,9 +6,11 @@ Bildplats provides a basic API supporting `GET` requests for retrieving data, th
 
 All API calls should go to `api.php`.
 
-##Methods 
+##Methods
 
-The only current method is `object` this is used to return the location based on a URI provided by K-Samsök:
+###Object
+
+This method is used to return the location based on a URI provided by K-Samsök:
 
 The object URI is set using the `uri` parameter. The API supports all types of K-Samsök URIs:
 
@@ -21,7 +23,7 @@ The object URI is set using the `uri` parameter. The API supports all types of K
  - html
  - htmlurl
 
-##Example Calls
+####Example Calls
 
 Example request:
 
@@ -41,6 +43,29 @@ This request would work just as well:
 
 `http://example.com/api.php?method=object&uri=raa/kmb/16000200096441`
 
+###Box
+
+The `box` method is used to retrieve all objects within a bounding box. All parameters is required.
+
+####Example Calls
+
+Example request:
+
+`http://example.com/api.php?method=box&south=38.00000&east=40.00000&north=58.80000&west=0.00000`
+
+This could trigger the following response:
+
+```
+[
+  {
+    "id":"31",
+    "ksamsok":"http://kulturarvsdata.se/raa/kmb/16001000066124",
+    "coord":"58.76046, 17.005",
+    "created":"2015-02-06 19:18:35"
+  }
+]
+```
+
 ##Errors
 
 A error is formated JSON describing  the error. Example:
@@ -53,5 +78,7 @@ Note that this is still a HTTP status 200 response.
 
  - `An object with this URI does not exists in the database.`
  - `Invalid URI or no URI parameter set.`
+ - `Invalid parameters or parameter values.`
+ - `No objects exist within this bounding box.`
  - `Invalid API method.`
  - `No method specified.`

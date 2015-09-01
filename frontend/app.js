@@ -127,6 +127,17 @@ function nextImage() {
       'slow');
 
     imageNum = imageNum+1;
+
+    // preload next image
+    var preImage = searchResult[imageNum].presentation.images[0];
+    console.log(preImage);
+    if (preImage.highres) {
+      preLoadImage(preImage.highres);
+    } else if (preImage.thumbnail) {
+      preLoadImage(preImage.thumbnail);
+    } else if (preImage.lowres) {
+      preLoadImage(preImage.lowres);
+    }
   }
 }
 
@@ -139,6 +150,12 @@ function prepareMap() {
   $('html,body').animate({
     scrollTop: $('#map').offset().top},
     'slow');
+}
+
+function preLoadImage(url) {
+  var image = new Image();
+  image.src = url;
+  console.log('imagepre');
 }
 
 function getLocation() {

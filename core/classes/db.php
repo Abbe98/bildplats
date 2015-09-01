@@ -36,4 +36,25 @@ class db {
 
     return $database->single();
   }
+
+  public static function boxSearch($box) {
+    $database = SimplePDO::getInstance();
+    $database->query("SELECT * FROM `photos`");
+    $result = $database->resultSet();
+
+
+    foreach ($result as $image) {
+      $lonlat = explode(', ', $image['coord']);
+
+      if ($lonlat[0] >= $box[0] && $lonlat[0] <= $box[2] && $lonlat[1] >= $box[3] && $lonlat[1] <= $box[2]) {
+        $endResult[] = $image;
+      }
+    }
+
+    if (isset($endResult)) {
+      return $endResult;
+    } else {
+      return false;
+    }
+  }
 }

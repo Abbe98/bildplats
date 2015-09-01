@@ -61,9 +61,23 @@ if (user::authorized()) {
 
 		<script src="frontend/ui.js"></script>
 		<script src="frontend/app.js"></script>
+<?php
+if (isset($_GET['search'])) {
+  if (isset($_GET['result'])) {
+    if (isset($_GET['uri'])) {
+       echo '<script>searchImages(\'' . $_GET['search'] . '\', checkLinkedUri); var linkedResult = \'' . $_GET['result'] . '\'; var linkedUri = \'' . $_GET['uri'] . '\';</script>';
+    } else {
+      echo '<script>searchImages(\'' . $_GET['search'] . '\'); imageNum = ' . $_GET['result'] . ';</script>';
+    }
+  } else {
+    echo '<script>searchImages(\'' . $_GET['search'] . '\');</script>';
+  }
+}
+?>
 	</body>
 </html>
 <?php
+
 } else {
   #TODO
   // send to login page

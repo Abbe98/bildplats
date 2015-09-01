@@ -19,7 +19,7 @@ $('#form').submit(function(e) {
 // global
 
 var searchResult;
-var imageNum;
+var imageNum = 0;
 var numResults;
 var currentUri;
 
@@ -46,7 +46,7 @@ function searchHintCall() {
   });
 }
 
-function searchImages(searchString) {
+function searchImages(searchString, callback) {
   var val = $('#search').val(searchString);
   toggleLoader();
 
@@ -61,11 +61,14 @@ function searchImages(searchString) {
       } else {
         numResults = result.length;
         $('#num_results').text(numResults);
-        imageNum = 0;
         searchResult = result;
 
         nextImage();
         toggleLoader();
+
+        if (callback !== undefined && typeof(callback) === 'function') {
+          callback();
+        };
       }
     }
   });
@@ -130,7 +133,6 @@ function nextImage() {
 
     // preload next image
     var preImage = searchResult[imageNum].presentation.images[0];
-    console.log(preImage);
     if (preImage.highres) {
       preLoadImage(preImage.highres);
     } else if (preImage.thumbnail) {
@@ -155,7 +157,19 @@ function prepareMap() {
 function preLoadImage(url) {
   var image = new Image();
   image.src = url;
-  console.log('imagepre');
+}
+
+function checkLinkedUri() {
+  if (searchResult[linkedResult].local.uri !== linkedUri) {
+    message.message = 'Bilden ser redan ut att vara kartlagd.';
+    message.error = 'correct';
+    message(message);
+    imageNum = 0;
+    nextImage();
+  } else {
+    imageNum = linkedResult;
+    nextImage();
+  }
 }
 
 function getLocation() {

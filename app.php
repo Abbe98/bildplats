@@ -59,8 +59,11 @@ if (user::authorized()) {
 			<div class="loader-circle"></div>
 		</div>
 
-		<script src="frontend/ui.js"></script>
+		<script src="frontend/bildplats.js"></script>
 		<script src="frontend/app.js"></script>
+		<script>
+		  bildPlats.init();
+		</script>
 <?php
 if (isset($_GET['search'])) {
   if (isset($_GET['result'])) {

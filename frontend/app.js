@@ -48,7 +48,7 @@ function searchHintCall() {
 
 function searchImages(searchString, callback) {
   var val = $('#search').val(searchString);
-  toggleLoader();
+  bildPlats.ui.toggleLoader();
 
   $.ajax({
     url: 'ajax.php',
@@ -56,15 +56,15 @@ function searchImages(searchString, callback) {
     data: {action: 'search', searchString: searchString},
     success: function(result) {
       if (result.result == 'error') {
-        message(result);
-        toggleLoader();
+        bildPlats.ui.message(result);
+        bildPlats.ui.toggleLoader();
       } else {
         numResults = result.length;
         $('#num_results').text(numResults);
         searchResult = result;
 
         nextImage();
-        toggleLoader();
+        bildPlats.ui.toggleLoader();
 
         if (callback !== undefined && typeof(callback) === 'function') {
           callback();
@@ -146,7 +146,7 @@ function nextImage() {
 function prepareMap() {
   $('#map').css('display', 'block');
   if (!mapCreated) {
-    createMap();
+    bildPlats.ui.createMap();
   }
 
   $('html,body').animate({
@@ -163,7 +163,7 @@ function checkLinkedUri() {
   if (searchResult[linkedResult].local.uri !== linkedUri) {
     message.message = 'Bilden ser redan ut att vara kartlagd.';
     message.error = 'correct';
-    message(message);
+    bildPlats.ui.message(message);
     imageNum = 0;
     nextImage();
   } else {

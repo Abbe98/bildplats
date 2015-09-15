@@ -1,7 +1,25 @@
+$('#search').keyup(function() {
+  bildPlats.app.searchHintCall();
+});
+
+$('#search').focus(function() {
+  bildPlats.app.searchHintCall();
+});
+
+$('#search').focusout(function() {
+  $('#autocomplete').slideUp('slow');
+});
+
+$('#form').submit(function(e) {
+  e.preventDefault();
+  var searchString = $('#search').val();
+  bildPlats.app.searchImages(searchString);
+});
+
 bildPlats = {
   init: function() {
-    window.L.mapbox.accessToken = 'pk.eyJ1IjoiYWJiZSIsImEiOiJmMUJVRkRrIn0.HFVLR_-KbhpiuV9DBkt7jw';
-    window.mapId = 'abbe.kj42nfkg';
+    L.mapbox.accessToken = 'pk.eyJ1IjoiYWJiZSIsImEiOiJmMUJVRkRrIn0.HFVLR_-KbhpiuV9DBkt7jw';
+    mapId = 'abbe.kj42nfkg';
   }
 };
 
@@ -10,8 +28,8 @@ bildPlats.ui = {
   leafletMap: 'abbe.kj42nfkg',
 
   createMap: function() {
-    this.leafletMap = L.mapbox.map('leaflet', mapId);
-    this.mapCreated = true;
+    bildPlats.ui.leafletMap = L.mapbox.map('leaflet', mapId);
+    bildPlats.ui.mapCreated = true;
   },
 
   message: function(message) {
@@ -25,7 +43,7 @@ bildPlats.ui = {
 
     $('#message').text(message.message);
     $('#message').css('top', '10px');
-    this.resetMessage()
+    bildPlats.ui.resetMessage()
   },
 
   resetMessage: function() {

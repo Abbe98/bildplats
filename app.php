@@ -40,8 +40,8 @@ if (user::authorized()) {
 				<p>Fotograf: <span id="by"></span></p>
 				<p>Copyright: <span id="copyright"></span></p>
 				<div class="btn-container two">
-					<div class="btn green" onclick="prepareMap()">Välj Plats</div>
-					<div class="btn green" id="next_pic" onclick="nextImage()" data-mode="enabled">Nästa</div>
+					<div class="btn green" onclick="bildPlats.app.prepareMap()">Välj Plats</div>
+					<div class="btn green" id="next_pic" onclick="bildPlats.app.nextImage()" data-mode="enabled">Nästa</div>
 				</div>
 			</div>
 		</section>
@@ -51,7 +51,7 @@ if (user::authorized()) {
 			<input hidden type="text" id="current_uri" value="" />
 			<div id="leaflet"></div>
 			<div class="btn-container single">
-				<div class="btn blue" id="location_picker" onclick="getLocation()">Välj Plats</div>
+				<div class="btn blue" id="location_picker" onclick="bildPlats.app.getLocation()">Välj Plats</div>
 			</div>
 		</section>
 
@@ -60,7 +60,7 @@ if (user::authorized()) {
 		</div>
 
 		<script src="frontend/bildplats.js"></script>
-		<script src="frontend/app.js"></script>
+		<script src="frontend/refactor/app.js"></script>
 		<script>
 		  bildPlats.init();
 		</script>
@@ -68,12 +68,12 @@ if (user::authorized()) {
 if (isset($_GET['search'])) {
   if (isset($_GET['result'])) {
     if (isset($_GET['uri'])) {
-       echo '<script>searchImages(\'' . $_GET['search'] . '\', checkLinkedUri); var linkedResult = \'' . $_GET['result'] . '\'; var linkedUri = \'' . $_GET['uri'] . '\';</script>';
+       echo '<script>bildPlats.app.searchImages(\'' . $_GET['search'] . '\', checkLinkedUri); var linkedResult = \'' . $_GET['result'] . '\'; var linkedUri = \'' . $_GET['uri'] . '\';</script>';
     } else {
-      echo '<script>searchImages(\'' . $_GET['search'] . '\'); imageNum = ' . $_GET['result'] . ';</script>';
+      echo '<script>bildPlats.app.searchImages(\'' . $_GET['search'] . '\'); bildPlats.app.imageNum = ' . $_GET['result'] . ';</script>';
     }
   } else {
-    echo '<script>searchImages(\'' . $_GET['search'] . '\');</script>';
+    echo '<script>bildPlats.app.searchImages(\'' . $_GET['search'] . '\');</script>';
   }
 }
 ?>

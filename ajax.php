@@ -10,7 +10,7 @@ if (isset($_POST['action'])) {
       $results = $KSamsok->searchHint($_POST['searchString'], '3');
       if ($results['count'] !== '0') {
         for ($i=0; $i < $results['count']; $i++) {
-          echo '<span onclick="searchImages(\'' . $results['hints'][$i]['value'] . '\');">' . ucfirst($results['hints'][$i]['value']) . '</span>';
+          echo '<span onclick="bildPlats.app.searchImages(\'' . $results['hints'][$i]['value'] . '\');">' . ucfirst($results['hints'][$i]['value']) . '</span>';
         }
       } else {
         echo '';

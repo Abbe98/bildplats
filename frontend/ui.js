@@ -7,6 +7,10 @@ bildPlats.ui = {
     bildPlats.ui.mapCreated = true;
   },
 
+  setImage: function(url) {
+    $('#image_holder').attr('src', url);
+  },
+
   message: function(message) {
     if (message.result == 'error') {
       // it's a error

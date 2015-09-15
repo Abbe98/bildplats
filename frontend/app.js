@@ -97,11 +97,11 @@ bildPlats.app = {
       }
 
       if (image.highres) {
-        $('#image_holder').attr('src', image.highres);
+        bildPlats.ui.setImage(image.highres);
       } else if (image.thumbnail) {
-        $('#image_holder').attr('src', image.thumbnail);
+        bildPlats.ui.setImage(image.thumbnail);
       } else if (image.lowres) {
-        $('#image_holder').attr('src', image.lowres);
+        bildPlats.ui.setImage(image.lowres);
       }
 
       $('#image').css('display', 'block');

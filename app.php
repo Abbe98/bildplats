@@ -60,7 +60,8 @@ if (user::authorized()) {
 		</div>
 
 		<script src="frontend/bildplats.js"></script>
-		<script src="frontend/refactor/app.js"></script>
+		<script src="frontend/ui.js"></script>
+		<script src="frontend/app.js"></script>
 		<script>
 		  bildPlats.init();
 		</script>

@@ -11,6 +11,10 @@ bildPlats.ui = {
     $('#image_holder').attr('src', url);
   },
 
+  setCopyright: function(copyString) {
+    $('#copyright').text(copyString);
+  },
+
   message: function(message) {
     if (message.result == 'error') {
       // it's a error

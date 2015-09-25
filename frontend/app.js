@@ -91,9 +91,9 @@ bildPlats.app = {
       }
 
       if (image.copyright) {
-        $('#copyright').text(image.copyright);
+        bildPlats.ui.setCopyright(image.copyright);
       } else {
-        $('#copyright').text('Okänd');
+        bildPlats.ui.setCopyright('Okänd');
       }
 
       if (image.highres) {

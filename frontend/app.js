@@ -3,6 +3,7 @@ bildPlats.app = {
   imageNum: 0,
   numResults: undefined,
   currentUri: undefined,
+  activeSearchString: undefined,
   // counts searchHintCall() ajax calls
   currentSearchCall: 0,
 
@@ -30,18 +31,30 @@ bildPlats.app = {
     var val = $('#search').val(searchString);
     bildPlats.ui.toggleLoader();
 
+    if (searchString === bildPlats.app.activeSearchString) {
+      searchN++;
+    } else {
+      var searchN = 0;
+    }
+
     $.ajax({
       url: 'ajax.php',
       type: 'POST',
-      data: {action: 'search', searchString: searchString},
+      data: {action: 'search', searchString: searchString, searchN: searchN},
       success: function(result) {
         if (result.result == 'error') {
           bildPlats.ui.message(result);
           bildPlats.ui.toggleLoader();
         } else {
-          bildPlats.app.numResults = result.length;
-          $('#num_results').text(bildPlats.app.numResults);
-          bildPlats.app.searchResult = result;
+          //bildPlats.app.searchResult = bildPlats.app.searchResult.concat(result);
+          //bildPlats.app.searchResult = result.push.apply(bildPlats.app.searchResult, result);
+          if (!bildPlats.app.searchResult === undefined) {
+            bildPlats.app.searchResult = bildPlats.app.searchResult.concat(result);
+          } else {
+            bildPlats.app.searchResult = result;
+          }
+
+          bildPlats.app.activeSearchString = searchString;
 
           bildPlats.app.nextImage();
           bildPlats.ui.toggleLoader();
@@ -60,6 +73,7 @@ bildPlats.app = {
     $('#location_picker').text('Välj Plats');
 
     if (bildPlats.app.imageNum === bildPlats.app.numResults) {
+      // #TODO first try to load more images
       // kill #next_pic uses CSS to kill pointer events.
       $('#next_pic').attr('data-mode', 'disabled');
     } else {

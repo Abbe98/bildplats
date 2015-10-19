@@ -1,8 +1,10 @@
 <?php
 class customKSamsok extends kSamsok {
-  public function photoSearch($text) {
+  public function photoSearch($text, $n) {
+    $startRecord = $n * 30;
+
     // build $urlQuery
-    $urlQuery = $this->url . 'x-api=' . $this->key . '&method=search&hitsPerPage=250&query=itemType="Foto"%20and%20text="' . $text . '"%20and%20mediaType="image/jpeg"%20and%20thumbnailExists=j&recordSchema=presentation';
+    $urlQuery = $this->url . 'x-api=' . $this->key . '&method=search&startRecord=' . $startRecord . '&hitsPerPage=30&query=itemType="Foto"%20and%20text="' . $text . '"%20and%20mediaType="image/jpeg"%20and%20thumbnailExists=j&recordSchema=presentation';
     $urlQuery = $this->prepareUrl($urlQuery);
 
     $this->validResponse($urlQuery);

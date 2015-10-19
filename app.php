@@ -31,7 +31,6 @@ if (user::authorized()) {
 
 		<section id="image" class="container">
 			<div class="wrapper-one">
-				<span class="result-count" id="num_results"></span>
 				<img id="image_holder" src="" />
 			</div>
 			<div class="wrapper-two">

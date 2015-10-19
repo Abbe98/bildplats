@@ -19,8 +19,8 @@ if (isset($_POST['action'])) {
   }
 
   if ($_POST['action'] === 'search') {
-    if (isset($_POST['searchString'])) {
-      $results = $KSamsok->photoSearch($_POST['searchString']);
+    if (isset($_POST['searchString']) && isset($_POST['searchN'])) {
+      $results = $KSamsok->photoSearch($_POST['searchString'], $_POST['searchN']);
 
       if (!empty($results)) {
         for ($i=0; $i < count($results); $i++) {

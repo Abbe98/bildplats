@@ -4,6 +4,8 @@ bildPlats.app = {
   numResults: undefined,
   currentUri: undefined,
   activeSearchString: undefined,
+  // counts searches with this active search string
+  searchN: 0,
   // counts searchHintCall() ajax calls
   currentSearchCall: 0,
 
@@ -32,23 +34,21 @@ bildPlats.app = {
     bildPlats.ui.toggleLoader();
 
     if (searchString === bildPlats.app.activeSearchString) {
-      searchN++;
+      bildPlats.app.searchN +=1;
     } else {
-      var searchN = 0;
+      bildPlats.app.searchN = 0;
     }
 
     $.ajax({
       url: 'ajax.php',
       type: 'POST',
-      data: {action: 'search', searchString: searchString, searchN: searchN},
+      data: {action: 'search', searchString: searchString, searchN: bildPlats.app.searchN},
       success: function(result) {
         if (result.result == 'error') {
           bildPlats.ui.message(result);
           bildPlats.ui.toggleLoader();
         } else {
-          //bildPlats.app.searchResult = bildPlats.app.searchResult.concat(result);
-          //bildPlats.app.searchResult = result.push.apply(bildPlats.app.searchResult, result);
-          if (!bildPlats.app.searchResult === undefined) {
+          if (bildPlats.app.searchResult !== undefined && searchString === bildPlats.app.activeSearchString) {
             bildPlats.app.searchResult = bildPlats.app.searchResult.concat(result);
           } else {
             bildPlats.app.searchResult = result;
@@ -68,14 +68,12 @@ bildPlats.app = {
   },
 
   nextImage: function() {
-    // #next_pic should be enabled by default disabling is done below
     $('#next_pic').attr('data-mode', 'enabled');
     $('#location_picker').text('Välj Plats');
 
-    if (bildPlats.app.imageNum === bildPlats.app.numResults) {
-      // #TODO first try to load more images
-      // kill #next_pic uses CSS to kill pointer events.
-      $('#next_pic').attr('data-mode', 'disabled');
+    if (bildPlats.app.imageNum === bildPlats.app.searchResult.length) {
+      // load more images and move to the next one using callback
+      bildPlats.app.searchImages(bildPlats.app.activeSearchString, bildPlats.app.nextImage);
     } else {
       // set uri
       bildPlats.app.currentUri = bildPlats.app.searchResult[bildPlats.app.imageNum].presentation.uri;
@@ -126,13 +124,15 @@ bildPlats.app = {
       bildPlats.app.imageNum = bildPlats.app.imageNum+1;
 
       // preload next image
-      var preImage = bildPlats.app.searchResult[bildPlats.app.imageNum].presentation.images[0];
-      if (preImage.highres) {
-        bildPlats.app.preLoadImage(preImage.highres);
-      } else if (preImage.thumbnail) {
-        bildPlats.app.preLoadImage(preImage.thumbnail);
-      } else if (preImage.lowres) {
-        bildPlats.app.preLoadImage(preImage.lowres);
+      if (bildPlats.app.searchResult[bildPlats.app.imageNum] < bildPlats.app.searchResult.length - 1) {
+        var preImage = bildPlats.app.searchResult[bildPlats.app.imageNum].presentation.images[0];
+        if (preImage.highres) {
+          bildPlats.app.preLoadImage(preImage.highres);
+        } else if (preImage.thumbnail) {
+          bildPlats.app.preLoadImage(preImage.thumbnail);
+        } else if (preImage.lowres) {
+          bildPlats.app.preLoadImage(preImage.lowres);
+        }
       }
     }
   },

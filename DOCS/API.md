@@ -33,9 +33,11 @@ This could trigger the following response:
 
 ```
 {
+  "id":"2",
   "ksamsok": "http://kulturarvsdata.se/raa/kmb/16000200096441",
   "coord": "59.31708, 18.099",
-  "created": "2015-02-02 10:32:04"
+  "created": "2015-02-02 10:32:04",
+    "user":"Abbe98"
 }
 ```
 
@@ -61,7 +63,32 @@ This could trigger the following response:
     "id":"31",
     "ksamsok":"http://kulturarvsdata.se/raa/kmb/16001000066124",
     "coord":"58.76046, 17.005",
-    "created":"2015-02-06 19:18:35"
+    "created":"2015-02-06 19:18:35",
+    "user":"Abbe98"
+  }
+]
+```
+
+###User
+
+The `user` method returns all objects by an specific user. All parameters is required.
+
+####Example Calls
+
+Example request:
+
+`http://example.com/api.php?method=user&user=Abbe98`
+
+This could trigger the following response:
+
+```
+[
+  {
+    "id":"31",
+    "ksamsok":"http://kulturarvsdata.se/raa/kmb/16001000066124",
+    "coord":"58.76046, 17.005",
+    "created":"2015-02-06 19:18:35",
+    "user":"Abbe98"
   }
 ]
 ```
@@ -82,3 +109,4 @@ Note that this is still a HTTP status 200 response.
  - `No objects exist within this bounding box.`
  - `Invalid API method.`
  - `No method specified.`
+ - `Missing user parameter or invalid user/user has no images.`

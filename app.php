@@ -66,14 +66,18 @@ if (user::authorized()) {
 		</script>
 <?php
 if (isset($_GET['search'])) {
-  if (isset($_GET['result'])) {
-    if (isset($_GET['uri'])) {
-       echo '<script>bildPlats.app.searchImages(\'' . $_GET['search'] . '\', checkLinkedUri); var linkedResult = \'' . $_GET['result'] . '\'; var linkedUri = \'' . $_GET['uri'] . '\';</script>';
+  echo '<script>bildPlats.app.searchImages(\'' . $_GET['search'] . '\');</script>';
+} else if (isset($_GET['uri'])) {
+  $uri = $KSamsok->uriFormat($_GET['uri'], 'rawurl');
+  if ($uri !== false) {
+    $result = db::getObject($uri);
+    if (!$result) {
+      #TODO
+      // make individual uri search
     } else {
-      echo '<script>bildPlats.app.searchImages(\'' . $_GET['search'] . '\'); bildPlats.app.imageNum = ' . $_GET['result'] . ';</script>';
+      #TODO
+      // redirect to image view $uri
     }
-  } else {
-    echo '<script>bildPlats.app.searchImages(\'' . $_GET['search'] . '\');</script>';
   }
 }
 ?>

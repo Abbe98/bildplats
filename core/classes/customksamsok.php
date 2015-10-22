@@ -22,4 +22,11 @@ class customKSamsok extends kSamsok {
 
     return $result;
   }
+
+  public function singlePhotoSearch($uri) {
+    $result = $this->object($uri);
+    #TODO 
+    // validate that this is a non georeferenced picture with thumbnalis, itemType=Foto and mediaType=image/jpeg
+    return $result;
+  }
 }

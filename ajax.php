@@ -59,7 +59,23 @@ if (isset($_POST['action'])) {
       }
     } else {
       header('Content-type: application/json');
+      echo('{"result": "error","message": "Något Gick Fel"}');
+    }
+  }
+
+  if ($_POST['action'] === 'object') {
+    if (isset($_POST['uri'])) {
+      if ($KSamsok->uriFormat($_POST['uri'], 'raw', true)) {
+        $result[] = $KSamsok->singlePhotoSearch($_POST['uri']);
+        header('Content-type: application/json');
+        echo json_encode($result);
+      } else {
+        header('Content-type: application/json');
         echo('{"result": "error","message": "Något Gick Fel"}');
+      }
+    } else {
+      header('Content-type: application/json');
+      echo('{"result": "error","message": "Något Gick Fel"}');
     }
   }
 }

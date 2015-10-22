@@ -72,11 +72,10 @@ if (isset($_GET['search'])) {
   if ($uri !== false) {
     $result = db::getObject($uri);
     if (!$result) {
-      #TODO
-      // make individual uri search
+      echo '<script>bildPlats.app.objectSearch(\'' . $_GET['uri'] . '\');</script>';
     } else {
-      #TODO
-      // redirect to image view $uri
+      header('Location: ' . 'image.php?uri=' . $KSamsok->uriFormat($_GET['uri'], 'raw'));
+      die();
     }
   }
 }

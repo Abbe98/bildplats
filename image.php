@@ -25,11 +25,14 @@ if (isset($_GET['uri'])) {
 <!doctype html>
 <html lang="sv">
 	<head>
-		<title><?php echo $KSamsok->uriFormat($result['kosamsok'], 'raw'); ?></title>
+		<title><?php echo $KSamsok->uriFormat($result['ksamsok'], 'raw'); ?></title>
 		<meta charset="UTF8" />
 
 		<link rel="stylesheet" href="frontend/style.css" />
 		<link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.css" />
+
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script src="https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js"></script>
 	</head>
 	<body>
 

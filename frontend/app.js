@@ -67,9 +67,11 @@ bildPlats.app = {
     });
   },
 
-  nextImage: function() {
-    $('#next_pic').attr('data-mode', 'enabled');
+  nextImage: function(type) {
     $('#location_picker').text('Välj Plats');
+    if (type != 'single') {
+      $('#next_pic').attr('data-mode', 'enabled');
+    }
 
     if (bildPlats.app.imageNum === bildPlats.app.searchResult.length) {
       // load more images and move to the next one using callback
@@ -149,21 +151,29 @@ bildPlats.app = {
   },
 
   preLoadImage: function(url) {
-  var image = new Image();
-  image.src = url;
+    var image = new Image();
+    image.src = url;
   },
 
-  checkLinkedUri: function() {
-    if (bildPlats.app.searchResult[linkedResult].local.uri !== linkedUri) {
-      message.message = 'Bilden ser redan ut att vara kartlagd.';
-      message.error = 'correct';
-      bildPlats.ui.message(message);
-      bildPlats.app.imageNum = 0;
-      bildPlats.app.nextImage();
-    } else {
-      bildPlats.app.imageNum = linkedResult;
-      bildPlats.app.nextImage();
-    }
+  objectSearch: function(uri) {
+    bildPlats.ui.toggleLoader();
+
+    $.ajax({
+      url: 'ajax.php',
+      type: 'POST',
+      data: {action: 'object', uri: uri},
+      success: function(result) {
+        if (result.result == 'error') {
+          bildPlats.ui.message(result);
+          bildPlats.ui.toggleLoader();
+        } else {
+          bildPlats.app.searchResult = result;
+          $('#next_pic').attr('data-mode', 'disabled');
+          bildPlats.ui.toggleLoader();
+          bildPlats.app.nextImage('single');
+        }
+      }
+    });
   },
 
   getLocation: function() {

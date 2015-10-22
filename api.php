@@ -41,6 +41,14 @@ if (isset($_GET['method'])) {
       echo json_encode($result, JSON_UNESCAPED_SLASHES);
       die();
     }
+  } elseif ($_GET['method'] === 'user') {
+    //
+    $result = db::getObjectsByUsername($_GET['user']);
+    if (!$result) {
+      apiError('Missing user parameter or invalid user/user has no images.');
+    } else {
+      echo json_encode($result, JSON_UNESCAPED_SLASHES);
+    }
   } else {
     apiError('Invalid API method.');
   }

@@ -34,20 +34,19 @@ define('PASSWORD', '');`
 ###Database SQL
 
 ```
-CREATE TABLE IF NOT EXISTS photos (
-id int(11) NOT NULL,
-  ksamsok varchar(150) COLLATE utf8mb4_bin NOT NULL,
-  coord varchar(16) COLLATE utf8mb4_bin NOT NULL,
-  created timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin AUTO_INCREMENT=31 ;
+CREATE TABLE IF NOT EXISTS `photos` (
+`id` int(11) NOT NULL,
+  `ksamsok` varchar(150) COLLATE utf8mb4_bin NOT NULL,
+  `coord` varchar(16) COLLATE utf8mb4_bin NOT NULL,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `user` varchar(999) COLLATE utf8mb4_bin NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin AUTO_INCREMENT=44 ;
 
+ALTER TABLE `photos`
+ ADD PRIMARY KEY (`id`);
 
-ALTER TABLE photos
- ADD PRIMARY KEY (id);
-
-
-ALTER TABLE photos
-MODIFY id int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=31;
+ALTER TABLE `photos`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=44;
 ```
 
 ##K-Samsök API

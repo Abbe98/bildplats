@@ -57,4 +57,12 @@ class db {
       return false;
     }
   }
+
+  public static function getObjectsByUsername($username) {
+    $database = SimplePDO::getInstance();
+    $database->query("SELECT * FROM `photos` WHERE `user` = :user");
+    $database->bind(':user', $username);
+
+    return $database->resultSet();
+  }
 }

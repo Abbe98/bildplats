@@ -1,7 +1,6 @@
 bildPlats.app = {
   searchResult: undefined,
   imageNum: 0,
-  numResults: undefined,
   currentUri: undefined,
   activeSearchString: undefined,
   // counts searches with this active search string

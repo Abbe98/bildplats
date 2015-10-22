@@ -2,7 +2,7 @@
 require_once 'core/init.php';
 
 if (isset($_GET['method'])) {
-  header('Content-Type: text/plain; charset=utf-8');
+  header('Content-Type: application/json; charset=utf-8');
 
   if ($_GET['method'] === 'object') {
     $uri = $KSamsok->uriFormat($_GET['uri'], 'rawurl');
@@ -48,6 +48,7 @@ if (isset($_GET['method'])) {
       apiError('Missing user parameter or invalid user/user has no images.');
     } else {
       echo json_encode($result, JSON_UNESCAPED_SLASHES);
+      die();
     }
   } else {
     apiError('Invalid API method.');
@@ -58,4 +59,5 @@ if (isset($_GET['method'])) {
 
 function apiError($message) {
   echo '{ "error:": "' . $message . '"}';
+  die();
 }

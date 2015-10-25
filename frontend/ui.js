@@ -38,5 +38,24 @@ bildPlats.ui = {
 
   toggleLoader: function() {
     $('.loader').slideToggle();
+  },
+
+  toggleFeedMap: function(landingElement) {
+    if (landingElement === 'feed') {
+      $('#feed').css('display', 'block');
+      $('#leaflet').css('display', 'none');
+      $('#feed-btn').attr('data-mode', 'active');
+      $('#leaflet-btn').attr('data-mode', 'inactive');
+    } else {
+      if (bildPlats.ui.mapCreated) {
+        $('#leaflet').css('display', 'block');
+      } else {
+        $('#leaflet').css('display', 'block');
+        bildPlats.ui.createMap();
+      }
+      $('#feed').css('display', 'none');
+      $('#feed-btn').attr('data-mode', 'inactive');
+      $('#leaflet-btn').attr('data-mode', 'active');
+    }
   }
 };

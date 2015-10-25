@@ -21,9 +21,13 @@ require_once 'core/init.php';
 				<button><img src="frontend/img/commons-logo.svg" /><span>Wikimedia Commons</span></button>
 			</div>
 			<nav class="tabs">
-				<a href="#feed">Flöde</a>
-				<a href="#map">Karta</a>
+				<div id="feed-btn" onclick="bildPlats.ui.toggleFeedMap('feed')" data-mode="active">Flöde</div>
+				<div id="leaflet-btn" onclick="bildPlats.ui.toggleFeedMap('leaflet')" data-mode="inactive">Karta</div>
 			</nav>
+			<main>
+				<section class="main-section" id="feed">#stuff</section>
+				<section class="main-section" id="leaflet"></section>
+			</main>
 		</div>
 
 		<script src="frontend/bildplats.js"></script>

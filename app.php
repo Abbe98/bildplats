@@ -9,6 +9,7 @@ if (user::authorized()) {
 		<meta charset="UTF8" />
 
 		<link rel="stylesheet" href="frontend/style.css" />
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 		<link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.css" />
 
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -53,6 +54,16 @@ if (user::authorized()) {
 				<div class="btn blue" id="location_picker" onclick="bildPlats.app.getLocation()">Välj Plats</div>
 			</div>
 		</section>
+
+		<nav class="menu">
+			<ul id="menu">
+				<li data-hint="Hem" aria-label="Hem"><i class="material-icons" style="line-height: 40px !important;">home</i></li>
+				<li data-hint="Profil" aria-label="Profil"><i class="material-icons" style="line-height: 40px !important;">person</i></li>
+				<li data-hint="Direkt Länk: Sökning" aria-label="Direkt Länk: Sökning"><i class="material-icons" style="line-height: 40px !important;">search</i></li>
+				<li data-hint="Direkt Länk: Bild" aria-label="Direkt Länk: Bild"><i class="material-icons" style="line-height: 40px !important;">link</i></li>
+			</ul>
+			<span onclick="bildPlats.ui.toggleMenu()"><i class="material-icons" style="line-height: 50px !important;">menu</i></span>
+		</nav>
 
 		<div aria-hidden="true" class="loader">
 			<div class="loader-circle"></div>

@@ -8,6 +8,7 @@ require_once 'core/init.php';
 		<meta charset="UTF8" />
 
 		<link rel="stylesheet" href="frontend/style.css" />
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 		<link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.css" />
 
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -29,6 +30,15 @@ require_once 'core/init.php';
 				<section class="main-section" id="leaflet"></section>
 			</main>
 		</div>
+
+		<nav class="menu">
+			<ul id="menu">
+				<li data-hint="Hem" aria-label="Hem"><i class="material-icons" style="line-height: 40px !important;">home</i></li>
+				<li data-hint="Profil" aria-label="Profil"><i class="material-icons" style="line-height: 40px !important;">person</i></li>
+				<li data-hint="Bidra" aria-label="Bidra"><i class="material-icons" style="line-height: 40px !important;">photo</i></li>
+			</ul>
+			<span onclick="bildPlats.ui.toggleMenu()"><i class="material-icons" style="line-height: 50px !important;">menu</i></span>
+		</nav>
 
 		<script src="frontend/bildplats.js"></script>
 		<script src="frontend/ui.js"></script>

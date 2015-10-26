@@ -1,6 +1,7 @@
 bildPlats.ui = {
   mapCreated: false,
   leafletMap: 'abbe.kj42nfkg',
+  menuState: false,
 
   createMap: function() {
     bildPlats.ui.leafletMap = L.mapbox.map('leaflet', mapId);
@@ -57,5 +58,15 @@ bildPlats.ui = {
       $('#feed-btn').attr('data-mode', 'inactive');
       $('#leaflet-btn').attr('data-mode', 'active');
     }
-  }
+  },
+
+  toggleMenu: function() {
+    if (!bildPlats.ui.menuState) {
+     document.getElementById('menu').className = 'open';
+      bildPlats.ui.menuState = true;
+    } else {
+      document.getElementById('menu').className = 'close';
+      bildPlats.ui.menuState = false;
+    }
+}
 };

@@ -65,4 +65,13 @@ class db {
 
     return $database->resultSet();
   }
+
+  public static function getObjectsByDate($startDate, $endDate) {
+    $database = SimplePDO::getInstance();
+    $database->query("SELECT * FROM `photos` WHERE `created` >= :startDate AND `created` < :endDate ORDER BY `created` DESC");
+    $database->bind(':startDate', $startDate);
+    $database->bind(':endDate', $endDate);
+
+    return $database->resultSet();
+  }
 }

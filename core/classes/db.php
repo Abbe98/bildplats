@@ -75,10 +75,10 @@ class db {
     return $database->resultSet();
   }
 
-  public static function getObjects($start, $skip = 0) {
+  public static function getObjects($num, $skip = 0) {
     $database = SimplePDO::getInstance();
-    $database->query("SELECT * FROM `photos` ORDER BY `created` DESC LIMIT :start, :skip");
-    $database->bind(':start', $start);
+    $database->query("SELECT * FROM `photos` ORDER BY `created` DESC LIMIT :skip, :num");
+    $database->bind(':num', $num);
     $database->bind(':skip', $skip);
 
     return $database->resultSet();

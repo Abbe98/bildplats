@@ -1,10 +1,10 @@
-#INSTALL
+# INSTALL
 
-##PHP
+## PHP
 
 PHP 5.6+ is required.
 
-##Composer
+## Composer
 
 Run the following in the project location:
 
@@ -15,9 +15,9 @@ This will install the following libraries:
  - [Simple-PDO](https://github.com/Abbe98/Simple-PDO)
  - [KSamsök-PHP](https://github.com/Abbe98/ksamsok-php)
 
-##Database Setup
+## Database Setup
 
-###Database Configuration
+### Database Configuration
 
 You set your database configuration variables in `core/config.php`.
 
@@ -26,12 +26,12 @@ define('DBNAME', '');
 define('USERNAME', '');
 define('PASSWORD', '');`
 
-###Supported Databases:
+### Supported Databases:
 
  - MySQL
  - MariaDB
 
-###Database SQL
+### Database SQL
 
 ```
 CREATE TABLE IF NOT EXISTS `photos` (
@@ -49,7 +49,7 @@ ALTER TABLE `photos`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=44;
 ```
 
-##K-Samsök API
+## K-Samsök API
 
 It's required that you have a API key for the K-Samsök API see the (official K-Samsök website)[http://www.ksamsok.se/in-english/]. 
 
@@ -59,7 +59,7 @@ The API key variable is found in `core/config.php`.
 
 `$kSamsokApiKey = '';`
 
-##Mapbox
+## Mapbox
 
 For the map you will need a free or premium (Mapbox account)[https://www.mapbox.com/].
 

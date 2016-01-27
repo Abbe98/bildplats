@@ -1,14 +1,14 @@
-#API
+# API
 
 Bildplats provides a basic API supporting `GET` requests for retrieving data, the response is currently JSON only.
 
-##Endpoint
+## Endpoint
 
 All API calls should go to `api.php`.
 
-##Methods
+## Methods
 
-###Object
+### Object
 
 This method is used to return the location based on a URI provided by K-Samsök:
 
@@ -23,7 +23,7 @@ The object URI is set using the `uri` parameter. The API supports all types of K
  - html
  - htmlurl
 
-####Example Calls
+#### Example Calls
 
 Example request:
 
@@ -45,11 +45,11 @@ This request would work just as well:
 
 `http://example.com/api.php?method=object&uri=raa/kmb/16000200096441`
 
-###Box
+### Box
 
 The `box` method is used to retrieve all objects within a bounding box. All parameters is required.
 
-####Example Calls
+#### Example Calls
 
 Example request:
 
@@ -69,11 +69,11 @@ This could trigger the following response:
 ]
 ```
 
-###User
+### User
 
 The `user` method returns all objects by an specific user. All parameters is required.
 
-####Example Calls
+#### Example Calls
 
 Example request:
 
@@ -93,7 +93,7 @@ This could trigger the following response:
 ]
 ```
 
-##Errors
+## Errors
 
 A error is formated JSON describing  the error. Example:
 
@@ -101,7 +101,7 @@ A error is formated JSON describing  the error. Example:
 
 Note that this is still a HTTP status 200 response.
 
-###List of Errors
+### List of Errors
 
  - `An object with this URI does not exists in the database.`
  - `Invalid URI or no URI parameter set.`

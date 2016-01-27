@@ -8,7 +8,7 @@ if (isset($_GET['uri'])) {
     if (!$result) {
       header('Location: app.php?uri=' . $uri);
     } else {
-      // request object using KSamsok->object()
+      $record = $KSamsok->object($uri);
     }
   } else {
     #TODO

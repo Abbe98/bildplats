@@ -6,8 +6,7 @@ if (isset($_GET['uri'])) {
   if ($uri !== false) {
     $result = db::getObject($uri);
     if (!$result) {
-      #TODO
-      // make uri search
+      header('Location: app.php?uri=' . $uri);
     } else {
       // request object using KSamsok->object()
     }

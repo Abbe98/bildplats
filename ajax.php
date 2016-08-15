@@ -42,6 +42,9 @@ if (isset($_POST['action'])) {
           header('Content-type: application/json; charset=utf-8');
           echo('{"result": "error","message": "Inga Foton Hittades"}');
       }
+    } else {
+      header('Content-type: application/json; charset=utf-8');
+      echo('{"result": "error","message": "Något Gick Fel"}');
     }
   }
 

@@ -32,14 +32,14 @@ if (isset($_POST['action'])) {
 
         // output result as JSON
         if (isset($searchResult)) {
-          header('Content-type: application/json');
+          header('Content-type: application/json; charset=utf-8');
           echo json_encode($searchResult);
         } else {
-          header('Content-type: application/json');
+          header('Content-type: application/json; charset=utf-8');
           echo('{"result": "error","message": "Inga Foton Hittades"}');
         }
       } else {
-          header('Content-type: application/json');
+          header('Content-type: application/json; charset=utf-8');
           echo('{"result": "error","message": "Inga Foton Hittades"}');
       }
     }
@@ -50,15 +50,15 @@ if (isset($_POST['action'])) {
       // try to save(pass $KSamsok connection because PHP sucks right now)
       if ($db::save($_POST['uri'], $_POST['location'], $KSamsok)) {
         // added to db :-)
-        header('Content-type: application/json');
+        header('Content-type: application/json; charset=utf-8');
         echo('{"result": "correct","message": "Platsen Sparades"}');
       } else {
         // saving failed
-        header('Content-type: application/json');
+        header('Content-type: application/json; charset=utf-8');
         echo('{"result": "error","message": "Något Gick Fel"}');
       }
     } else {
-      header('Content-type: application/json');
+      header('Content-type: application/json; charset=utf-8');
       echo('{"result": "error","message": "Något Gick Fel"}');
     }
   }
@@ -67,14 +67,14 @@ if (isset($_POST['action'])) {
     if (isset($_POST['uri'])) {
       if ($KSamsok->uriFormat($_POST['uri'], 'raw', true)) {
         $result[] = $KSamsok->singlePhotoSearch($_POST['uri']);
-        header('Content-type: application/json');
+        header('Content-type: application/json; charset=utf-8');
         echo json_encode($result);
       } else {
-        header('Content-type: application/json');
+        header('Content-type: application/json; charset=utf-8');
         echo('{"result": "error","message": "Något Gick Fel"}');
       }
     } else {
-      header('Content-type: application/json');
+      header('Content-type: application/json; charset=utf-8');
       echo('{"result": "error","message": "Något Gick Fel"}');
     }
   }

@@ -68,5 +68,5 @@ bildPlats.ui = {
       document.getElementById('menu').className = 'close';
       bildPlats.ui.menuState = false;
     }
-}
+  }
 };

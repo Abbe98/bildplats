@@ -111,10 +111,10 @@ bildPlats.app = {
 
       if (image.highres) {
         bildPlats.ui.setImage(image.highres);
-      } else if (image.thumbnail) {
-        bildPlats.ui.setImage(image.thumbnail);
       } else if (image.lowres) {
         bildPlats.ui.setImage(image.lowres);
+      } else if (image.thumbnail) {
+        bildPlats.ui.setImage(image.thumbnail);
       }
 
       $('#image').css('display', 'block');

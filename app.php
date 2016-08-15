@@ -57,7 +57,7 @@ if (user::authorized()) {
 
 		<nav class="menu">
 			<ul id="menu">
-				<li data-hint="Hem" aria-label="Hem"><i class="material-icons" style="line-height: 40px !important;">home</i></li>
+				<li data-hint="Hem" aria-label="Hem"><a href="index.php"><i class="material-icons" style="line-height: 40px !important;">home</i></a></li>
 				<li data-hint="Profil" aria-label="Profil"><i class="material-icons" style="line-height: 40px !important;">person</i></li>
 				<li data-hint="Direkt Länk: Sökning" aria-label="Direkt Länk: Sökning"><i class="material-icons" style="line-height: 40px !important;">search</i></li>
 				<li data-hint="Direkt Länk: Bild" aria-label="Direkt Länk: Bild"><i class="material-icons" style="line-height: 40px !important;">link</i></li>
